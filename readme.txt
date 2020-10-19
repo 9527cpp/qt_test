@@ -1,7 +1,7 @@
 qt compile:
 1:./configure -release -opensource -no-openssl -no-opengl -skip qtdeclarative
 2:copy /usr/local/Qt5.6.0/plugins/platforms  -> qt_project
-3:vim ~/.bashrc   add   export DISPLAY=localhost:0   source ~/.bashrc(this is set xserver windows must run xserver)
+3:vim ~/.bashrc   add   export DISPLAY=localhost:0(WSL1) export DISPLAY=`cat /etc/resolv.conf|grep nameserver |awk '{print $2}'`:0(WSL2)  source ~/.bashrc(this is set xserver windows must run xserver)
 4:run qmake -project to jenerate .pro file
 5:add QT+= (modules) to add modules 
 6:add SOURCES += xxx.cpp add HEADERS += xxx.h
