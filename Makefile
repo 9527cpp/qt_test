@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -std=gnu++0x -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I. -I/usr/local/Qt-5.6.2/include -I/usr/local/Qt-5.6.2/include/QtWidgets -I/usr/local/Qt-5.6.2/include/QtGui -I/usr/local/Qt-5.6.2/include/QtCore -I. -I/usr/local/Qt-5.6.2/mkspecs/linux-g++
+INCPATH       = -I. -I. -I/usr/local/Qt-5.6.2/include -I/usr/local/Qt-5.6.2/include/QtOpenGL -I/usr/local/Qt-5.6.2/include/QtWidgets -I/usr/local/Qt-5.6.2/include/QtMultimedia -I/usr/local/Qt-5.6.2/include/QtGui -I/usr/local/Qt-5.6.2/include/QtNetwork -I/usr/local/Qt-5.6.2/include/QtCore -I. -I/usr/local/Qt-5.6.2/mkspecs/linux-g++
 QMAKE         = /usr/local/Qt-5.6.2/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = qt_test1.0.0
 DISTDIR = /home/lijun/qtest/qt_test/.tmp/qt_test1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,/usr/local/Qt-5.6.2/lib
-LIBS          = $(SUBLIBS) -L/usr/local/Qt-5.6.2/lib -lQt5Widgets -lQt5Gui -lQt5Core -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/local/Qt-5.6.2/lib -lQt5OpenGL -lQt5Widgets -lQt5Multimedia -lQt5Gui -lQt5Network -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -85,6 +85,10 @@ DIST          = /usr/local/Qt-5.6.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_nfc.pri \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_nfc_private.pri \
+		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_opengl.pri \
+		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_opengl_private.pri \
+		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_openglextensions.pri \
+		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_openglextensions_private.pri \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_platformsupport_private.pri \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_positioning.pri \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_positioning_private.pri \
@@ -134,6 +138,7 @@ DIST          = /usr/local/Qt-5.6.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/qt.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/resources.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/moc.prf \
+		/usr/local/Qt-5.6.2/mkspecs/features/unix/opengl.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/uic.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/unix/thread.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/file_copies.prf \
@@ -187,6 +192,10 @@ Makefile: qt_test.pro /usr/local/Qt-5.6.2/mkspecs/linux-g++/qmake.conf /usr/loca
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_nfc.pri \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_nfc_private.pri \
+		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_opengl.pri \
+		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_opengl_private.pri \
+		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_openglextensions.pri \
+		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_openglextensions_private.pri \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_platformsupport_private.pri \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_positioning.pri \
 		/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_positioning_private.pri \
@@ -236,6 +245,7 @@ Makefile: qt_test.pro /usr/local/Qt-5.6.2/mkspecs/linux-g++/qmake.conf /usr/loca
 		/usr/local/Qt-5.6.2/mkspecs/features/qt.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/resources.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/moc.prf \
+		/usr/local/Qt-5.6.2/mkspecs/features/unix/opengl.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/uic.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/unix/thread.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/file_copies.prf \
@@ -244,8 +254,11 @@ Makefile: qt_test.pro /usr/local/Qt-5.6.2/mkspecs/linux-g++/qmake.conf /usr/loca
 		/usr/local/Qt-5.6.2/mkspecs/features/yacc.prf \
 		/usr/local/Qt-5.6.2/mkspecs/features/lex.prf \
 		qt_test.pro \
+		/usr/local/Qt-5.6.2/lib/libQt5OpenGL.prl \
 		/usr/local/Qt-5.6.2/lib/libQt5Widgets.prl \
+		/usr/local/Qt-5.6.2/lib/libQt5Multimedia.prl \
 		/usr/local/Qt-5.6.2/lib/libQt5Gui.prl \
+		/usr/local/Qt-5.6.2/lib/libQt5Network.prl \
 		/usr/local/Qt-5.6.2/lib/libQt5Core.prl
 	$(QMAKE) -o Makefile qt_test.pro
 /usr/local/Qt-5.6.2/mkspecs/features/spec_pre.prf:
@@ -282,6 +295,10 @@ Makefile: qt_test.pro /usr/local/Qt-5.6.2/mkspecs/linux-g++/qmake.conf /usr/loca
 /usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_network_private.pri:
 /usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_nfc.pri:
 /usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_nfc_private.pri:
+/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_opengl.pri:
+/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_opengl_private.pri:
+/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_openglextensions.pri:
+/usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_openglextensions_private.pri:
 /usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_platformsupport_private.pri:
 /usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_positioning.pri:
 /usr/local/Qt-5.6.2/mkspecs/modules/qt_lib_positioning_private.pri:
@@ -331,6 +348,7 @@ Makefile: qt_test.pro /usr/local/Qt-5.6.2/mkspecs/linux-g++/qmake.conf /usr/loca
 /usr/local/Qt-5.6.2/mkspecs/features/qt.prf:
 /usr/local/Qt-5.6.2/mkspecs/features/resources.prf:
 /usr/local/Qt-5.6.2/mkspecs/features/moc.prf:
+/usr/local/Qt-5.6.2/mkspecs/features/unix/opengl.prf:
 /usr/local/Qt-5.6.2/mkspecs/features/uic.prf:
 /usr/local/Qt-5.6.2/mkspecs/features/unix/thread.prf:
 /usr/local/Qt-5.6.2/mkspecs/features/file_copies.prf:
@@ -339,8 +357,11 @@ Makefile: qt_test.pro /usr/local/Qt-5.6.2/mkspecs/linux-g++/qmake.conf /usr/loca
 /usr/local/Qt-5.6.2/mkspecs/features/yacc.prf:
 /usr/local/Qt-5.6.2/mkspecs/features/lex.prf:
 qt_test.pro:
+/usr/local/Qt-5.6.2/lib/libQt5OpenGL.prl:
 /usr/local/Qt-5.6.2/lib/libQt5Widgets.prl:
+/usr/local/Qt-5.6.2/lib/libQt5Multimedia.prl:
 /usr/local/Qt-5.6.2/lib/libQt5Gui.prl:
+/usr/local/Qt-5.6.2/lib/libQt5Network.prl:
 /usr/local/Qt-5.6.2/lib/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile qt_test.pro
@@ -493,8 +514,9 @@ moc_test.cpp: /usr/local/Qt-5.6.2/include/QtWidgets/QWidget \
 		/usr/local/Qt-5.6.2/include/QtWidgets/qpushbutton.h \
 		/usr/local/Qt-5.6.2/include/QtWidgets/qabstractbutton.h \
 		/usr/local/Qt-5.6.2/include/QtGui/qicon.h \
+		/usr/local/Qt-5.6.2/include/QtGui/QPaintEvent \
 		test.h
-	/usr/local/Qt-5.6.2/bin/moc $(DEFINES) -I/usr/local/Qt-5.6.2/mkspecs/linux-g++ -I/home/lijun/qtest/qt_test -I/home/lijun/qtest/qt_test -I/usr/local/Qt-5.6.2/include -I/usr/local/Qt-5.6.2/include/QtWidgets -I/usr/local/Qt-5.6.2/include/QtGui -I/usr/local/Qt-5.6.2/include/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include test.h -o moc_test.cpp
+	/usr/local/Qt-5.6.2/bin/moc $(DEFINES) -I/usr/local/Qt-5.6.2/mkspecs/linux-g++ -I/home/lijun/qtest/qt_test -I/home/lijun/qtest/qt_test -I/usr/local/Qt-5.6.2/include -I/usr/local/Qt-5.6.2/include/QtOpenGL -I/usr/local/Qt-5.6.2/include/QtWidgets -I/usr/local/Qt-5.6.2/include/QtMultimedia -I/usr/local/Qt-5.6.2/include/QtGui -I/usr/local/Qt-5.6.2/include/QtNetwork -I/usr/local/Qt-5.6.2/include/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include test.h -o moc_test.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -625,7 +647,486 @@ test.o: test.cpp /usr/local/Qt-5.6.2/include/QtWidgets/QApplication \
 		/usr/local/Qt-5.6.2/include/QtWidgets/qpushbutton.h \
 		/usr/local/Qt-5.6.2/include/QtWidgets/qabstractbutton.h \
 		/usr/local/Qt-5.6.2/include/QtGui/qicon.h \
-		test.h
+		/usr/local/Qt-5.6.2/include/QtWidgets/QMessageBox \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qmessagebox.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qdialog.h \
+		/usr/local/Qt-5.6.2/include/QtGui/QPixmap \
+		/usr/local/Qt-5.6.2/include/QtGui/QPainter \
+		/usr/local/Qt-5.6.2/include/QtGui/qpainter.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtextoption.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qpen.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/QSplashScreen \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qsplashscreen.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/QtMultimedia \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/QtMultimediaDepends \
+		/usr/local/Qt-5.6.2/include/QtCore/QtCore \
+		/usr/local/Qt-5.6.2/include/QtCore/QtCoreDepends \
+		/usr/local/Qt-5.6.2/include/QtCore/qabstractanimation.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qanimationgroup.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qparallelanimationgroup.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qpauseanimation.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qpropertyanimation.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qvariantanimation.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qeasingcurve.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qsequentialanimationgroup.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qtextcodec.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qendian.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qlibraryinfo.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qdatetime.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qbuffer.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qdir.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qfileinfo.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qdiriterator.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qfileselector.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QObject \
+		/usr/local/Qt-5.6.2/include/QtCore/QStringList \
+		/usr/local/Qt-5.6.2/include/QtCore/qfilesystemwatcher.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qlockfile.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qloggingcategory.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qprocess.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qresource.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qsavefile.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qsettings.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qstandardpaths.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qstorageinfo.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qtemporarydir.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QScopedPointer \
+		/usr/local/Qt-5.6.2/include/QtCore/qtemporaryfile.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qabstractitemmodel.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qabstractproxymodel.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qidentityproxymodel.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qitemselectionmodel.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qsortfilterproxymodel.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qstringlistmodel.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qjsonarray.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qjsonvalue.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qjsondocument.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qjsonobject.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qabstracteventdispatcher.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qabstractnativeeventfilter.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qbasictimer.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qmath.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qmetaobject.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qmimedata.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qobjectcleanuphandler.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qpointer.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qsharedmemory.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qsignalmapper.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qsocketnotifier.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qsystemsemaphore.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qtimer.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qtranslator.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qwineventnotifier.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qmimedatabase.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qmimetype.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qfactoryinterface.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qlibrary.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qplugin.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qpluginloader.h \
+		/usr/local/Qt-5.6.2/include/QtCore/quuid.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qabstractstate.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qabstracttransition.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qeventtransition.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qfinalstate.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qhistorystate.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qsignaltransition.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qstate.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qstatemachine.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qexception.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qfuture.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qfutureinterface.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qrunnable.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qresultstore.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qfuturesynchronizer.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qfuturewatcher.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qreadwritelock.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qsemaphore.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qthread.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qthreadpool.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qthreadstorage.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qwaitcondition.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qarraydataops.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qarraydatapointer.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qbitarray.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qbytearraymatcher.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qcache.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qcollator.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qcommandlineoption.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qcommandlineparser.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qcryptographichash.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qelapsedtimer.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qlinkedlist.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qmessageauthenticationcode.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qqueue.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qregularexpression.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qscopedvaluerollback.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qstack.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qtextboundaryfinder.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qtimeline.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qtimezone.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qversionnumber.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qxmlstream.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qtcoreversion.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/QtNetwork \
+		/usr/local/Qt-5.6.2/include/QtNetwork/QtNetworkDepends \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qabstractnetworkcache.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworkrequest.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QSharedDataPointer \
+		/usr/local/Qt-5.6.2/include/QtCore/QString \
+		/usr/local/Qt-5.6.2/include/QtCore/QUrl \
+		/usr/local/Qt-5.6.2/include/QtCore/QVariant \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qhttpmultipart.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QByteArray \
+		/usr/local/Qt-5.6.2/include/QtCore/QIODevice \
+		/usr/local/Qt-5.6.2/include/QtNetwork/QNetworkRequest \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworkaccessmanager.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/QSslConfiguration \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qsslconfiguration.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qsslsocket.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qtcpsocket.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qabstractsocket.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qsslerror.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qsslcertificate.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qssl.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QFlags \
+		/usr/local/Qt-5.6.2/include/QtNetwork/QSslPreSharedKeyAuthenticator \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qsslpresharedkeyauthenticator.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QtGlobal \
+		/usr/local/Qt-5.6.2/include/QtCore/QMetaType \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworkcookie.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QList \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworkcookiejar.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworkdiskcache.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworkreply.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/QNetworkAccessManager \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworkconfigmanager.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworkconfiguration.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworksession.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworkinterface.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qhostaddress.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qauthenticator.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qdnslookup.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qhostinfo.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qnetworkproxy.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qlocalserver.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qlocalsocket.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qtcpserver.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qudpsocket.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qsslcertificateextension.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qsslcipher.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qsslellipticcurve.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QHash \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qsslkey.h \
+		/usr/local/Qt-5.6.2/include/QtNetwork/qtnetworkversion.h \
+		/usr/local/Qt-5.6.2/include/QtGui/QtGui \
+		/usr/local/Qt-5.6.2/include/QtGui/QtGuiDepends \
+		/usr/local/Qt-5.6.2/include/QtGui/qaccessible.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qaccessiblebridge.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qaccessibleobject.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qaccessibleplugin.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qbitmap.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qiconengine.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qiconengineplugin.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qimageiohandler.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qimagereader.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qimagewriter.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qmovie.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qpicture.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qpictureformatplugin.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qpixmapcache.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qstandarditemmodel.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qclipboard.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qdrag.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qgenericplugin.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qgenericpluginfactory.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qoffscreensurface.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qsurface.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qsurfaceformat.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglcontext.h \
+		/usr/local/Qt-5.6.2/include/QtGui/QSurfaceFormat \
+		/usr/local/Qt-5.6.2/include/QtGui/qopengl.h \
+		/usr/local/Qt-5.6.2/include/QtCore/qt_windows.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopengles2ext.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglext.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglversionfunctions.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglwindow.h \
+		/usr/local/Qt-5.6.2/include/QtGui/QPaintDeviceWindow \
+		/usr/local/Qt-5.6.2/include/QtGui/qpaintdevicewindow.h \
+		/usr/local/Qt-5.6.2/include/QtGui/QWindow \
+		/usr/local/Qt-5.6.2/include/QtGui/qwindow.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QEvent \
+		/usr/local/Qt-5.6.2/include/QtCore/QMargins \
+		/usr/local/Qt-5.6.2/include/QtCore/QRect \
+		/usr/local/Qt-5.6.2/include/QtGui/QPaintDevice \
+		/usr/local/Qt-5.6.2/include/QtGui/QOpenGLContext \
+		/usr/local/Qt-5.6.2/include/QtGui/QImage \
+		/usr/local/Qt-5.6.2/include/QtGui/qrasterwindow.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qscreen.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QSize \
+		/usr/local/Qt-5.6.2/include/QtCore/QSizeF \
+		/usr/local/Qt-5.6.2/include/QtGui/QTransform \
+		/usr/local/Qt-5.6.2/include/QtGui/qsessionmanager.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qstylehints.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qgenericmatrix.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qmatrix4x4.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qvector3d.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qvector4d.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qquaternion.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglbuffer.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopengldebug.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglextrafunctions.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglfunctions.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglframebufferobject.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglpaintdevice.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglpixeltransferoptions.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglshaderprogram.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopengltexture.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopengltimerquery.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qopenglvertexarrayobject.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qbackingstore.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qpagedpaintdevice.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qpagelayout.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qpagesize.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qpaintengine.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qpdfwriter.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qabstracttextdocumentlayout.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtextlayout.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtextformat.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qglyphrun.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qrawfont.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qfontdatabase.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtextcursor.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtextdocument.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qstatictext.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qsyntaxhighlighter.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtextobject.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtextdocumentfragment.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtextdocumentwriter.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtextlist.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtexttable.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qdesktopservices.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qvalidator.h \
+		/usr/local/Qt-5.6.2/include/QtGui/qtguiversion.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediabindableinterface.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaobject.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qtmultimediadefs.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmultimedia.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediacontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaenumdebug.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediametadata.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaservice.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaserviceproviderplugin.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcamera.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameraexposure.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcamerafocus.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameraimageprocessing.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameraviewfindersettings.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qvideoframe.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qabstractvideobuffer.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediatimerange.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudio.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudiobuffer.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudioformat.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudiodecoder.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudiodeviceinfo.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudioinput.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudiooutput.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudioprobe.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudiosystem.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudiosystemplugin.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qsound.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qsoundeffect.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameraimagecapture.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaencodersettings.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcamerainfo.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudiodecodercontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudioencodersettingscontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediarecorder.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudioinputselectorcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudiooutputselectorcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudiorolecontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameracapturebufferformatcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameracapturedestinationcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameracontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameraexposurecontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcamerafeedbackcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameraflashcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcamerafocuscontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameraimagecapturecontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameraimageprocessingcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcamerainfocontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameralockscontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcameraviewfindersettingscontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qcamerazoomcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qimageencodercontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaaudioprobecontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaavailabilitycontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediacontainercontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediagaplessplaybackcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediacontent.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaresource.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmedianetworkaccesscontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaplayercontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaplayer.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediarecordercontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediastreamscontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediavideoprobecontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmetadatareadercontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmetadatawritercontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qradiodatacontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qradiodata.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qradiotunercontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qradiotuner.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qvideodeviceselectorcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qvideoencodersettingscontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qvideorenderercontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qvideowindowcontrol.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qmediaplaylist.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qaudiorecorder.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qabstractvideofilter.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qvideosurfaceformat.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qabstractvideosurface.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qvideoprobe.h \
+		/usr/local/Qt-5.6.2/include/QtMultimedia/qtmultimediaversion.h \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/QtOpenGL \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/QtOpenGLDepends \
+		/usr/local/Qt-5.6.2/include/QtWidgets/QtWidgets \
+		/usr/local/Qt-5.6.2/include/QtWidgets/QtWidgetsDepends \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qaccessiblewidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qcolordialog.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qerrormessage.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qfiledialog.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qfilesystemmodel.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qfontdialog.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qinputdialog.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qlineedit.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qframe.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qprogressdialog.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qwizard.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicseffect.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicsanchorlayout.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicsitem.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicslayout.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicslayoutitem.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicsgridlayout.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicsitemanimation.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicslinearlayout.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicsproxywidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicswidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicsscene.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicssceneevent.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicstransform.h \
+		/usr/local/Qt-5.6.2/include/QtGui/QVector3D \
+		/usr/local/Qt-5.6.2/include/QtGui/QMatrix4x4 \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgraphicsview.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qscrollarea.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qabstractscrollarea.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qabstractitemdelegate.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qstyleoption.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qabstractspinbox.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qslider.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qabstractslider.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qstyle.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtabbar.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtabwidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qrubberband.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qabstractitemview.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qcolumnview.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qdatawidgetmapper.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qdirmodel.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qfileiconprovider.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qheaderview.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qitemdelegate.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qitemeditorfactory.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qlistview.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qlistwidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qstyleditemdelegate.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtableview.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtablewidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtreeview.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtreewidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtreewidgetitemiterator.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qaction.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qactiongroup.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qboxlayout.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qlayout.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qlayoutitem.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgridlayout.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qformlayout.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/QLayout \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgesture.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgesturerecognizer.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qopenglwidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qshortcut.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qstackedlayout.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtooltip.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qwhatsthis.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qwidgetaction.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qkeyeventtransition.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qmouseeventtransition.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qcommonstyle.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qdrawutil.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qproxystyle.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/QCommonStyle \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qstylefactory.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qstylepainter.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qstyleplugin.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qcolormap.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qcompleter.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qscroller.h \
+		/usr/local/Qt-5.6.2/include/QtCore/QPointF \
+		/usr/local/Qt-5.6.2/include/QtWidgets/QScrollerProperties \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qscrollerproperties.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qsystemtrayicon.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qundogroup.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qundostack.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qundoview.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qbuttongroup.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qcalendarwidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qcheckbox.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qcombobox.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qcommandlinkbutton.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qdatetimeedit.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qdial.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qdialogbuttonbox.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qdockwidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qfocusframe.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qfontcombobox.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qgroupbox.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qkeysequenceedit.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qlabel.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qlcdnumber.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qmainwindow.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qmdiarea.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qmdisubwindow.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qmenu.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qmenubar.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qplaintextedit.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtextedit.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qprogressbar.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qradiobutton.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qscrollbar.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qsizegrip.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qspinbox.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qsplitter.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qstackedwidget.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qstatusbar.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtextbrowser.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtoolbar.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtoolbox.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtoolbutton.h \
+		/usr/local/Qt-5.6.2/include/QtWidgets/qtwidgetsversion.h \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/qgl.h \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/qglcolormap.h \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/qtopenglglobal.h \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/qglbuffer.h \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/qglframebufferobject.h \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/qglfunctions.h \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/qglpixelbuffer.h \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/qglshaderprogram.h \
+		/usr/local/Qt-5.6.2/include/QtOpenGL/qtopenglversion.h \
+		test.h \
+		/usr/local/Qt-5.6.2/include/QtGui/QPaintEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o test.o test.cpp
 
 moc_test.o: moc_test.cpp 

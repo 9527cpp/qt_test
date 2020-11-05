@@ -10,3 +10,5 @@ INCLUDEPATH += .
 SOURCES += test.cpp
 HEADERS += test.h
 QT += widgets
+QT += multimedia
+QT += opengl
