@@ -27,10 +27,10 @@ private:
 
 public:
     void send_signal(int value);
-public Q_SLOTS:
+public slots:
     void  valueChanged(int newValue);
 
-Q_SIGNALS:
+signals:
     void setValue(int value);
 
 };

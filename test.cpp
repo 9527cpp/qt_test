@@ -46,6 +46,9 @@ void QMyWidget::paintEvent(QPaintEvent *){
 
 TestA::TestA(){
 
+    // 内部使用 每个对象链接自己的信号槽
+    /* QObject::connect(this,SIGNAL(setValue(int)),this,SLOT(valueChanged(int))); */
+
 }
 
 TestA::~TestA(){
