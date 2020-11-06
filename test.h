@@ -32,6 +32,7 @@ public slots:
 
 signals:
     void setValue(int value);
+    void  setValueNoArgForMap();
 
 };
 

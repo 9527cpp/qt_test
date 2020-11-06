@@ -7,6 +7,7 @@
 #include <QSplashScreen>
 #include <QtMultimedia>
 #include <QtOpenGL>
+#include <QSignalMapper>
 #include <unistd.h>
 #include "test.h"
 
@@ -47,7 +48,23 @@ void QMyWidget::paintEvent(QPaintEvent *){
 TestA::TestA(){
 
     // 内部使用 每个对象链接自己的信号槽
+    // this is QT4 signal-slot whit SIGNAL && SLOT declare
     /* QObject::connect(this,SIGNAL(setValue(int)),this,SLOT(valueChanged(int))); */
+
+
+    // 使用signalmmapper 无参数信号链接有参数信号传导 然后再实现信号到槽函数
+#if 0
+    QSignalMapper* signalMapper;
+    signalMapper = new QSignalMapper(this);
+    for(int i = 0;i< 1;i++){
+
+        /// 这里的this 可以换成其它对象 比如widgets 上的多个button
+        connect(this,SIGNAL(setValueNoArgForMap()),signalMapper,SLOT(map()));
+        signalMapper->setMapping(this,i);
+    }
+    connect(signalMapper,SIGNAL(mapped(int)),this,SIGNAL(setValue(int)));
+    connect(this,SIGNAL(setValue(int)),this,SLOT(valueChanged(int)));
+#endif
 
 }
 
@@ -57,7 +74,11 @@ TestA::~TestA(){
 
 
 void TestA::send_signal(int value){
+#if 1
     emit setValue(value);
+#else /// signalmap
+    emit setValueNoArgForMap();
+#endif
 }
 
 //注意 信号无需实现
@@ -74,16 +95,18 @@ int main(int argc , char * argv[]){
 
     TestA a1,a2;
 
-    QObject::connect(&a1,&TestA::setValue,&a2,&TestA::valueChanged);
-
     a1.send_signal(1);
-    a1.send_signal(2);
-    a1.send_signal(3);
+    // this is QT5 signal-slot with class compiler check
+    /* QObject::connect(&a1,&TestA::setValue,&a2,&TestA::valueChanged); */
+
+    /* a1.send_signal(1); */
+    /* a1.send_signal(2); */
+    /* a1.send_signal(3); */
     
-    // a2 因为没有connect 所以发射无效
-    a2.send_signal(4);
-    a2.send_signal(5);
-    a2.send_signal(6);
+    /* // a2 因为没有connect 所以发射无效 */
+    /* a2.send_signal(4); */
+    /* a2.send_signal(5); */
+    /* a2.send_signal(6); */
 
     /* QMyWidget mw; */
     /* mw.setWindowTitle("helloworld"); */
