@@ -49,11 +49,12 @@ TestA::TestA(){
 
     // 内部使用 每个对象链接自己的信号槽
     // this is QT4 signal-slot whit SIGNAL && SLOT declare
-    /* QObject::connect(this,SIGNAL(setValue(int)),this,SLOT(valueChanged(int))); */
+#if 0
+    QObject::connect(this,SIGNAL(setValue(int)),this,SLOT(valueChanged(int)));
 
 
     // 使用signalmmapper 无参数信号链接有参数信号传导 然后再实现信号到槽函数
-#if 0
+#else
     QSignalMapper* signalMapper;
     signalMapper = new QSignalMapper(this);
     for(int i = 0;i< 1;i++){
@@ -74,11 +75,14 @@ TestA::~TestA(){
 
 
 void TestA::send_signal(int value){
-#if 1
+    // 加入调试信息 看发射信号 只有当所有的槽函数执行完毕返回结果  emit才返回
+    qDebug()<<"emit begin"<<endl;
+#if 0
     emit setValue(value);
 #else /// signalmap
     emit setValueNoArgForMap();
 #endif
+    qDebug()<<"emit finish"<<endl;
 }
 
 //注意 信号无需实现
